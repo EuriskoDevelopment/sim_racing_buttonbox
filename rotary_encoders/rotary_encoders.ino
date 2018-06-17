@@ -6,12 +6,15 @@
 #include <Boards.h>
 #include <Firmata.h>
 
-#define ENCODER_L_A 9  // Blue wire
-#define ENCODER_R_A 12  // Blue wire
-#define ENCODER_L_B 10  // orange
-#define ENCODER_R_B 11  // orange
-#define BUTTON_R 3
-#define BUTTON_L 4
+// Define input pin numbers on Arduino
+#define ENCODER_L_A 9   // Blue wire. CLK on rotary encoder
+#define ENCODER_R_A 12  // Blue wire. CLK on rotary encoder
+#define ENCODER_L_B 10  // orange wire. DT on rotary encoder
+#define ENCODER_R_B 11  // orange wire. DT on rotary encoder
+#define BUTTON_R 3      // SW on rotary encoder
+#define BUTTON_L 4      // SW on rotary encoder
+
+// Define LED output useful for debugging
 #define LED_BASE 13
 
 int buttonState_R = 0;
@@ -47,6 +50,7 @@ void loop() {
 
 int checkButton(int keycode, int button, int lastState)
 {
+  // Pullup button. First read input and write keycode to keyboard
   int buttonState = digitalRead(button);
   if (buttonState != lastState)
   {

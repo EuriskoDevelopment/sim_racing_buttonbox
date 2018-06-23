@@ -38,19 +38,19 @@ void setup() {
 void loop() {
    TrinketKeyboard.poll();
    
-   buttonState_R = checkButton(KEYCODE_P, BUTTON_R, buttonState_R);
-   buttonState_L = checkButton(KEYCODE_W, BUTTON_L, buttonState_L);
+   buttonState_R = checkButton(KEYCODE_A, BUTTON_R, buttonState_R);
+   buttonState_L = checkButton(KEYCODE_S, BUTTON_L, buttonState_L);
    
-   lastState_R_A = checkRotaryEncoder(ENCODER_R_A, ENCODER_R_B,      lastState_R_A, 
-      KEYCODE_MOD_LEFT_SHIFT, KEYCODE_I, KEYCODE_MOD_LEFT_SHIFT, KEYCODE_J); 
+   lastState_R_A = checkRotaryEncoder(ENCODER_R_A, ENCODER_R_B, lastState_R_A, 
+      KEYCODE_Z, KEYCODE_X); 
    lastState_L_A = checkRotaryEncoder(ENCODER_L_A, ENCODER_L_B, lastState_L_A,
-      KEYCODE_MOD_LEFT_SHIFT, KEYCODE_T, KEYCODE_MOD_LEFT_SHIFT, KEYCODE_Y);
+      KEYCODE_C, KEYCODE_V);
    
 }
 
 int checkButton(int keycode, int button, int lastState)
 {
-  // Pullup button. First read input and write keycode to keyboard
+  // Pullup button. First read input and write keyco,de to keyboard
   int buttonState = digitalRead(button);
   if (buttonState != lastState)
   {
@@ -66,9 +66,7 @@ int checkButton(int keycode, int button, int lastState)
 }
 
 int checkRotaryEncoder(int encoder_a, int encoder_b,
-   int lastStateA, 
-   int keycode_mod_right, int keycode_right, 
-   int keycode_mod_left, int keycode_left)
+   int lastStateA, int keycode_right, int keycode_left)
 {
    int stateA = digitalRead(encoder_a);
    if (lastStateA != stateA)
@@ -78,13 +76,13 @@ int checkRotaryEncoder(int encoder_a, int encoder_b,
      int stateB = digitalRead(encoder_b);
      if (stateB != stateA)
        {
-       TrinketKeyboard.pressKey(keycode_mod_right, keycode_right);
+       TrinketKeyboard.pressKey(0, keycode_right);
        delay(5);
        TrinketKeyboard.pressKey(0, 0);      
      }
      else
      {
-       TrinketKeyboard.pressKey(keycode_mod_left, keycode_left);
+       TrinketKeyboard.pressKey(0, keycode_left);
        delay(5);
        TrinketKeyboard.pressKey(0, 0);
      }
